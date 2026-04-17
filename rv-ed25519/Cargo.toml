@@ -1,0 +1,14 @@
+[package]
+name = "rv-ed25519"
+version = "0.1.0"
+edition = "2021"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+debug = true
+
+[dependencies]
+ed25519-dalek = { version = "2.2.0", default-features = false }

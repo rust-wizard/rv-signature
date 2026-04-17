@@ -13,6 +13,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 2) Verify with ed25519-dalek using the same public key/signature bytes.
     let public_key_bytes: [u8; 32] = keypair.public().as_ref().try_into()?;
     let signature_bytes: [u8; 64] = signature.as_ref().try_into()?;
+    let public_key_hex: String = public_key_bytes
+        .iter()
+        .map(|b| format!("{:02x}", b))
+        .collect();
+    let signature_hex: String = signature_bytes
+        .iter()
+        .map(|b| format!("{:02x}", b))
+        .collect();
+    println!("public_key_bytes (hex): {public_key_hex}");
+    println!("signature_bytes (hex): {signature_hex}");
 
     let dalek_public_key = DalekVerifyingKey::from_bytes(&public_key_bytes)?;
     let dalek_signature = DalekSignature::from_bytes(&signature_bytes);
